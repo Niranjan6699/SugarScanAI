@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+*.egg
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Backend media uploads
+
+# Node / Expo
+node_modules/
+.expo/
+mobile/.expo/
+mobile/dist/
+mobile/android/
+mobile/ios/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Alembic
+backend/migrations/versions/*.pyc
+backend/.env

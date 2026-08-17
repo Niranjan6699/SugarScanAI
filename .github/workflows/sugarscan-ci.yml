@@ -51,7 +51,10 @@ jobs:
       - name: Run Pytest E2E
         run: pytest backend/tests/e2e --junitxml=junit.xml || true
       - name: Generate Reports
-        run: python backend/tests/generate_report.py
+        run: |
+          python backend/tests/generate_report.py
+          pip install pandas openpyxl
+          python generate_excel.py
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
         with:
