@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SugarScan AI</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <!-- Background Effects -->
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      
+      <!-- Content Wrapper -->
+      <div class="container">
+        <!-- Left Side: Marketing / Description -->
+        <div class="marketing">
+          <div class="badge">Live Demo</div>
+          <h1>SugarScan <span>AI</span></h1>
+          <p class="subtitle">The intelligent continuous glucose monitoring assistant.</p>
+          
+          <ul class="features">
+            <li>
+              <div class="icon-box">🧠</div>
+              <div>
+                <strong>AI Chat Assistant</strong>
+                <p>Chat directly with your data using on-device models.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-box">📷</div>
+              <div>
+                <strong>Vision Scanning</strong>
+                <p>Scan meals instantly for carb estimations.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-box">⚡</div>
+              <div>
+                <strong>Real-time Sync</strong>
+                <p>Live glucose streaming with predictive spikes.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="cta-group">
+            <button class="btn btn-primary" onclick="reloadFrame()">Restart App</button>
+            <a href="https://github.com/Niranjan6699/SugarScanAI" target="_blank" class="btn btn-secondary">View Source</a>
+          </div>
+        </div>
+
+        <!-- Right Side: Phone Frame -->
+        <div class="phone-container">
+          <div class="marvel-device iphone-x">
+            <div class="notch">
+              <div class="camera"></div>
+              <div class="speaker"></div>
+            </div>
+            <div class="top-bar"></div>
+            <div class="sleep"></div>
+            <div class="bottom-bar"></div>
+            <div class="volume"></div>
+            <div class="overflow">
+              <div class="shadow shadow--tr"></div>
+              <div class="shadow shadow--tl"></div>
+              <div class="shadow shadow--br"></div>
+              <div class="shadow shadow--bl"></div>
+            </div>
+            <div class="inner-shadow"></div>
+            <div class="screen">
+              <!-- Expo Web App Iframe -->
+              <!-- The src will point to the exported Expo web build -->
+              <iframe id="app-frame" src="/app/index.html" frameborder="0"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

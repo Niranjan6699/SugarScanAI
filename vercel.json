@@ -1,5 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "cd mobile && npm install && npx expo export -p web",
-  "outputDirectory": "mobile/dist"
+  "buildCommand": "cd web && npm install && npm run build",
+  "outputDirectory": "web/dist",
+  "framework": "vite"
 }
