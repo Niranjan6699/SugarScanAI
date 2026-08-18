@@ -51,12 +51,14 @@ jobs:
             Vulnerability Test Results/findings.xlsx
             bandit-results.json
             semgrep-results.json
+          overwrite: true
 
       - name: Upload Gitleaks SARIF
         uses: actions/upload-artifact@v4
         with:
           name: gitleaks-results.sarif
           path: gitleaks-results.sarif
+          overwrite: true
 
   build_android_apk:
     name: 📱 Build Android APK
