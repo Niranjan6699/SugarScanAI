@@ -39,7 +39,8 @@ jobs:
           semgrep scan --config auto backend/app --json -o semgrep-results.json || true
 
       - name: Generate Dummy SARIF (if empty)
-        run: echo '{"version": "2.1.0", "runs": [{"tool": {"driver": {"name": "Gitleaks"}}, "results": []}]}' > gitleaks-results.sarif
+        run: |
+          echo '{"version": "2.1.0", "runs": [{"tool": {"driver": {"name": "Gitleaks"}}, "results": []}]}' > gitleaks-results.sarif
 
       - name: Upload Security Reports
         uses: actions/upload-artifact@v4
