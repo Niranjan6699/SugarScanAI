@@ -15,7 +15,7 @@ export function getApiErrorMessage(error: any, fallback = 'Something went wrong.
   return fallback;
 }
 
-const API_URL = process.env.EXPO_PUBLIC_API_URL || 'https://zuwem-157-51-198-143.run.pinggy-free.link';
+import { API_URL } from '../lib/apiConfig';
 
 if (__DEV__) {
   console.log(`[Network] API_URL configured as: ${API_URL}`);

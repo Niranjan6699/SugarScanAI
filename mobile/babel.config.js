@@ -7,6 +7,17 @@ module.exports = function (api) {
     ],
     plugins: [
       'react-native-reanimated/plugin',
+      function () {
+        return {
+          visitor: {
+            MetaProperty(path) {
+              if (path.node.meta.name === 'import' && path.node.property.name === 'meta') {
+                path.replaceWithSourceString('process');
+              }
+            },
+          },
+        };
+      },
     ],
   };
 };

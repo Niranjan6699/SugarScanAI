@@ -8,9 +8,9 @@
  * Onboarding state is still stored separately in SecureStore.
  */
 import { create } from 'zustand';
-import * as SecureStore from 'expo-secure-store';
 import type { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
+import { getStorageItem, setStorageItem, removeStorageItem } from '../lib/storage';
 
 const ONBOARDING_KEY = 'sugarscan_onboarding_v2';
 
@@ -45,7 +45,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   refreshToken: null,
 
   setHasCompletedOnboarding: async (val: boolean) => {
-    await SecureStore.setItemAsync(ONBOARDING_KEY, JSON.stringify(val));
+    await setStorageItem(ONBOARDING_KEY, JSON.stringify(val));
     set({ hasCompletedOnboarding: val });
   },
 
@@ -53,7 +53,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     try {
       // Supabase auto-restores session from SecureStore; we just read it.
       const { data: { session } } = await supabase.auth.getSession();
-      const onboardingRaw = await SecureStore.getItemAsync(ONBOARDING_KEY);
+      const onboardingRaw = await getStorageItem(ONBOARDING_KEY);
       const hasCompletedOnboarding = onboardingRaw === 'true';
 
       if (session) {
@@ -98,7 +98,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   clearAuth: async () => {
     await supabase.auth.signOut();
-    await SecureStore.deleteItemAsync(ONBOARDING_KEY);
+    await removeStorageItem(ONBOARDING_KEY);
     set({
       user:                   null,
       session:                null,

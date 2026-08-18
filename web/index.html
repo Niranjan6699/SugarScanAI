@@ -1,86 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SugarScan AI</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="app">
-      <!-- Background Effects -->
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      
-      <!-- Content Wrapper -->
-      <div class="container">
-        <!-- Left Side: Marketing / Description -->
-        <div class="marketing">
-          <div class="badge">Live Demo</div>
-          <h1>SugarScan <span>AI</span></h1>
-          <p class="subtitle">The intelligent continuous glucose monitoring assistant.</p>
-          
-          <ul class="features">
-            <li>
-              <div class="icon-box">🧠</div>
-              <div>
-                <strong>AI Chat Assistant</strong>
-                <p>Chat directly with your data using on-device models.</p>
-              </div>
-            </li>
-            <li>
-              <div class="icon-box">📷</div>
-              <div>
-                <strong>Vision Scanning</strong>
-                <p>Scan meals instantly for carb estimations.</p>
-              </div>
-            </li>
-            <li>
-              <div class="icon-box">⚡</div>
-              <div>
-                <strong>Real-time Sync</strong>
-                <p>Live glucose streaming with predictive spikes.</p>
-              </div>
-            </li>
-          </ul>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SugarScan AI</title>
+  <style>
+    :root {
+      --bg-color: #0d0f12;
+      --frame-border: #22252a;
+      --frame-glass: rgba(255, 255, 255, 0.05);
+      --frame-radius: 40px;
+    }
 
-          <div class="cta-group">
-            <button class="btn btn-primary" onclick="reloadFrame()">Restart App</button>
-            <a href="https://github.com/Niranjan6699/SugarScanAI" target="_blank" class="btn btn-secondary">View Source</a>
-          </div>
-        </div>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        <!-- Right Side: Phone Frame -->
-        <div class="phone-container">
-          <div class="marvel-device iphone-x">
-            <div class="notch">
-              <div class="camera"></div>
-              <div class="speaker"></div>
-            </div>
-            <div class="top-bar"></div>
-            <div class="sleep"></div>
-            <div class="bottom-bar"></div>
-            <div class="volume"></div>
-            <div class="overflow">
-              <div class="shadow shadow--tr"></div>
-              <div class="shadow shadow--tl"></div>
-              <div class="shadow shadow--br"></div>
-              <div class="shadow shadow--bl"></div>
-            </div>
-            <div class="inner-shadow"></div>
-            <div class="screen">
-              <!-- Expo Web App Iframe -->
-              <!-- The src will point to the exported Expo web build -->
-              <iframe id="app-frame" src="/app/index.html" frameborder="0"></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+    body {
+      background-color: var(--bg-color);
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Desktop Phone Frame */
+    .phone-frame {
+      position: relative;
+      width: 400px;
+      height: 850px;
+      border-radius: var(--frame-radius);
+      border: 14px solid var(--frame-border);
+      background: var(--bg-color);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Notch */
+    .notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 30px;
+      background: var(--frame-border);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      z-index: 100;
+    }
+
+    /* Iframe holding the Expo app */
+    .app-frame {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background-color: #0b0c10; /* Expo bgPage */
+    }
+
+    /* Header for Desktop */
+    .header {
+      position: absolute;
+      top: 40px;
+      left: -320px;
+      width: 280px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #aaff00, #4ade80);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header p {
+      color: #9ca3af;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Mobile view - Full bleed */
+    @media (max-width: 800px) {
+      .header {
+        display: none;
+      }
+      .phone-frame {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .notch {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>SugarScan AI</h1>
+    <p>Live Web Demo</p>
+    <p style="margin-top: 16px;">This wrapper demonstrates the Expo Web export running in a responsive mobile layout.</p>
+  </div>
+  
+  <div class="phone-frame">
+    <div class="notch"></div>
+    <iframe class="app-frame" src="./app/index.html" title="SugarScan AI App"></iframe>
+  </div>
+</body>
 </html>

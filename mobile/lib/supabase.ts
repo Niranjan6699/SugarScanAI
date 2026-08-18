@@ -9,8 +9,8 @@
  *   EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJ...
  */
 import { createClient } from '@supabase/supabase-js';
-import * as SecureStore from 'expo-secure-store';
 import type { Database } from './database.types';
+import { getStorageItem, setStorageItem, removeStorageItem } from './storage';
 
 const SUPABASE_URL  = process.env.EXPO_PUBLIC_SUPABASE_URL ?? 'https://xybwabndtirfzdnddobj.supabase.co';
 const SUPABASE_ANON =
@@ -19,18 +19,17 @@ const SUPABASE_ANON =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5YndhYm5kdGlyZnpkbmRkb2JqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2MzM2ODksImV4cCI6MjEwMjIwOTY4OX0.v-XOdJ1T5JOeL0CnIx5ZcBeR-dR4yWxT5shewh26tlM';
 
 /**
- * expo-secure-store adapter — Supabase stores sessions as JSON strings.
- * SecureStore limits keys to 256 chars, so we hash large keys.
+ * Cross-platform storage adapter for Supabase session persistence
  */
-const ExpoSecureStoreAdapter = {
-  getItem: (key: string) => SecureStore.getItemAsync(key),
-  setItem: (key: string, value: string) => SecureStore.setItemAsync(key, value),
-  removeItem: (key: string) => SecureStore.deleteItemAsync(key),
+const StorageAdapter = {
+  getItem: (key: string) => getStorageItem(key),
+  setItem: (key: string, value: string) => setStorageItem(key, value),
+  removeItem: (key: string) => removeStorageItem(key),
 };
 
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON, {
   auth: {
-    storage: ExpoSecureStoreAdapter,
+    storage: StorageAdapter,
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
