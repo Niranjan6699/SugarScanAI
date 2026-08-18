@@ -154,6 +154,7 @@ jobs:
           npx expo export -p web || true
           mkdir -p ../web/app
           cp -R dist/* ../web/app/ || true
+          find ../web/app -name "*.html" -type f -exec sed -i 's|="/|="./|g' {} +
       - name: Prepare Wrapper
         working-directory: ./web
         run: |
