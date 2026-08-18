@@ -149,10 +149,6 @@ jobs:
         env:
           EXPO_PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
         run: |
-          if [ -z "$EXPO_PUBLIC_API_URL" ]; then
-            echo "ERROR: EXPO_PUBLIC_API_URL is unset!"
-            exit 1
-          fi
           npm install -g replace-json-property
           replace-json-property app.json expo.experiments.baseUrl "/${{ github.event.repository.name }}/app"
           npx expo export -p web || true
